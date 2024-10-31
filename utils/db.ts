@@ -12,6 +12,20 @@ export interface Answer {
   count: number;
 }
 
+interface SurveyQuestion {
+  id: number;
+  question: string;
+  answers: Array<{
+    id: number;
+    answer: string;
+    selected: boolean;
+  }>;
+}
+
+interface SurveyData {
+  questions: SurveyQuestion[];
+}
+
 export class Database {
   private db: DB;
 
@@ -23,6 +37,31 @@ export class Database {
   private init() {
     const schema = Deno.readTextFileSync("./data/schema.sql");
     this.db.execute(schema);
+    this.initializeData();
+  }
+
+  private initializeData() {
+    // Only initialize if the database is empty
+    const count = this.db.query("SELECT COUNT(*) as count FROM QUESTIONS")[0][0];
+    if (count === 0) {
+      const surveyData = JSON.parse(
+        Deno.readTextFileSync("./data/questions.json")
+      ) as SurveyData;
+
+      for (const q of surveyData.questions) {
+        this.db.query("INSERT INTO QUESTIONS (id, question) VALUES (?, ?)", [
+          q.id,
+          q.question,
+        ]);
+
+        for (const a of q.answers) {
+          this.db.query(
+            "INSERT INTO ANSWERS (id, question_id, answer, count) VALUES (?, ?, ?, 0)",
+            [a.id, q.id, a.answer]
+          );
+        }
+      }
+    }
   }
 
   public getQuestions(): Question[] {
