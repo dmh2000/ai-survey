@@ -3,6 +3,7 @@ import { DB } from "https://deno.land/x/sqlite@v3.8/mod.ts";
 export interface Question {
   id: number;
   question: string;
+  [key: string]: string | number;
 }
 
 export interface Answer {
@@ -10,6 +11,7 @@ export interface Answer {
   question_id: number;
   answer: string;
   count: number;
+  [key: string]: string | number;
 }
 
 interface SurveyQuestion {
