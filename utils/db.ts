@@ -1,4 +1,4 @@
-import { DB } from "https://deno.land/x/sqlite@v3.8/mod.ts";
+import { DB } from "https://deno.land/x/sqlite@v3.9/mod.ts";
 
 export interface Question {
   id: number;
@@ -32,7 +32,8 @@ export class Database {
   private db: DB;
 
   constructor() {
-    this.db = new DB("./data/survey.db");
+    // Create database in memory for development
+    this.db = new DB(":memory:");
     this.init();
   }
 
