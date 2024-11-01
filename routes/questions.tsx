@@ -1,5 +1,6 @@
 import { Head } from "$fresh/runtime.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { getCookies, setCookie } from "$std/http/cookie.ts";
 import Navigation from "../components/Navigation.tsx";
 import { db } from "../utils/db.ts";
 
@@ -16,6 +17,15 @@ interface SurveyData {
 
 export const handler: Handlers<SurveyData> = {
   GET: async (_req, ctx) => {
+    const cookies = getCookies(_req.headers);
+    console.log("questions", cookies);
+    if (cookies.questions_done == "true") {
+      return new Response("Already done!", {
+        status: 303,
+        headers: { location: "/results" },
+      });
+    }
+
     const questions = db.getQuestions();
     const surveyData: SurveyData = {
       questions: await Promise.all(
@@ -26,6 +36,7 @@ export const handler: Handlers<SurveyData> = {
         })),
       ),
     };
+
     return ctx.render(surveyData);
   },
 
@@ -37,9 +48,19 @@ export const handler: Handlers<SurveyData> = {
       db.incrementAnswerCount(Number(answerId));
     }
 
+    const headers = new Headers();
+    setCookie(headers, {
+      name: "questions_done",
+      value: "true",
+      httpOnly: true,
+      secure: true,
+      sameSite: "Lax",
+    });
+    headers.set("location", "/results");
+
     return new Response("", {
       status: 303,
-      headers: { Location: "/results" },
+      headers,
     });
   },
 };

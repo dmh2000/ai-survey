@@ -1,4 +1,20 @@
 import { Head } from "$fresh/runtime.ts";
+import { Handlers } from "$fresh/server.ts";
+import { getCookies } from "$std/http/cookie.ts";
+
+export const handler: Handlers = {
+  GET: (_req, ctx) => {
+    const cookies = getCookies(_req.headers);
+    console.log("questions", cookies);
+    if (cookies.questions_done == "true") {
+      return new Response("Already done!", {
+        status: 303,
+        headers: { location: "/results" },
+      });
+    }
+    return ctx.render({});
+  },
+};
 
 export default function Home() {
   return (
@@ -9,8 +25,9 @@ export default function Home() {
       <div class="p-4 mx-auto max-w-screen-md">
         <h1 class="text-4xl font-bold mb-4">Reno Developer AI Survey</h1>
         <p class="mb-4">
-          Welcome to our survey about AI tools usage among developers. This survey aims to understand which AI technologies
-          are most popular in the developer community.
+          Welcome to our survey about AI tools usage among developers. This
+          survey aims to understand which AI technologies are most popular in
+          the developer community.
         </p>
         <div class="flex gap-4">
           <a

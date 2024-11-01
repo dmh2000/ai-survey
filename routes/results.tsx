@@ -3,6 +3,7 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import Navigation from "../components/Navigation.tsx";
 import { db } from "../utils/db.ts";
 import { Answer, Question } from "../utils/db.ts";
+import { getCookies } from "$std/http/cookie.ts";
 
 interface ResultsData {
   results: Array<{
@@ -18,6 +19,9 @@ export const handler: Handlers<ResultsData> = {
       question: q,
       answers: db.getAnswers(q.id),
     }));
+
+    const cookies = getCookies(_req.headers);
+    console.log("results", cookies);
     return ctx.render({ results });
   },
 };
@@ -30,7 +34,7 @@ export default function Results({ data }: PageProps<ResultsData>) {
       </Head>
       <Navigation />
       <div class="p-4 mx-auto max-w-screen-md">
-        <h1 class="text-4xl font-bold mb-8">Survey Results</h1>
+        <h1 class="text-4xl font-bold mb-8">Survey Completed : Results</h1>
         {data.results.map(({ question, answers }) => (
           <div key={question.id} class="mb-8">
             <h2 class="text-2xl font-semibold mb-4">{question.question}</h2>
