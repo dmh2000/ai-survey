@@ -1,4 +1,4 @@
-import { DB } from "https://deno.land/x/sqlite@v3.9/mod.ts";
+import { DB } from "https://deno.land/x/sqlite@v3.7.0/mod.ts";
 
 export interface Question {
   id: number;
