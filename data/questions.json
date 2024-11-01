@@ -2,52 +2,112 @@
     "questions": [
         {
             "id": 1,
-            "question": "What AI Models do you use?",
+            "question": "What AI Model Provider(s) do you use for coding?",
             "answers": [
                 {
-                    "id": 1,
-                    "answer": "OpenAI GPT-4",
+                    "id": 101,
+                    "answer": "OpenAI (various  models)",
                     "selected": false
                 },
                 {
-                    "id": 2,
-                    "answer": "Anthropic Claude",
+                    "id": 102,
+                    "answer": "Anthropic (Claude)",
                     "selected": false
                 },
                 {
-                    "id": 3,
-                    "answer": "Google Gemini",
+                    "id": 103,
+                    "answer": "DeepSeek (Coder)",
                     "selected": false
                 },
                 {
-                    "id": 4,
-                    "answer": "Local LLMs",
+                    "id": 104,
+                    "answer": "Gemini ",
+                    "selected": false
+                },
+                {
+                    "id": 105,
+                    "answer": "Llama",
+                    "selected": false
+                },
+                {
+                    "id": 106,
+                    "answer": "Mistral",
+                    "selected": false
+                },
+                {
+                    "id": 107,
+                    "answer": "Qwen",
+                    "selected": false
+                },
+                {
+                    "id": 108,
+                    "answer": "Other",
+                    "selected": false
+                },
+                {
+                    "id": 109,
+                    "answer": "None",
                     "selected": false
                 }
             ]
         },
         {
             "id": 2,
-            "question": "Which AI tools do you use for coding?",
+            "question": "Which in-editor AI code completion tool do you use?",
             "answers": [
                 {
-                    "id": 5,
+                    "id": 201,
                     "answer": "GitHub Copilot",
                     "selected": false
                 },
                 {
-                    "id": 6,
-                    "answer": "Amazon CodeWhisperer",
+                    "id": 202,
+                    "answer": "Amazon Q",
                     "selected": false
                 },
                 {
-                    "id": 7,
+                    "id": 203,
                     "answer": "Tabnine",
                     "selected": false
                 },
                 {
-                    "id": 8,
+                    "id": 204,
+                    "answer": "Replit",
+                    "selected": false
+                },
+                {
+                    "id": 205,
+                    "answer": "Cline",
+                    "selected": false
+                },
+                {
+                    "id": 206,
+                    "answer": "Codeium",
+                    "selected": false
+                },
+                {
+                    "id": 207,
+                    "answer": "Qodo (Codium)",
+                    "selected": false
+                },
+                {
+                    "id": 208,
+                    "answer": "SuperMaven",
+                    "selected": false
+                },
+                {
+                    "id": 209,
+                    "answer": "OpenAI Codex",
+                    "selected": false
+                },
+                {
+                    "id": 210,
                     "answer": "None",
+                    "selected": false
+                },
+                {
+                    "id": 211,
+                    "answer": "Other",
                     "selected": false
                 }
             ]
