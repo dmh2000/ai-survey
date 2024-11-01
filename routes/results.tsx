@@ -20,8 +20,6 @@ export const handler: Handlers<ResultsData> = {
       answers: db.getAnswers(q.id),
     }));
 
-    const cookies = getCookies(_req.headers);
-    console.log("results", cookies);
     return ctx.render({ results });
   },
 };

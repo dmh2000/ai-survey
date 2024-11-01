@@ -18,8 +18,7 @@ interface SurveyData {
 export const handler: Handlers<SurveyData> = {
   GET: async (_req, ctx) => {
     const cookies = getCookies(_req.headers);
-    console.log("questions", cookies);
-    if (cookies.questions_done == "true") {
+    if (cookies.survey_done == "true") {
       return new Response("Already done!", {
         status: 303,
         headers: { location: "/results" },
@@ -50,7 +49,7 @@ export const handler: Handlers<SurveyData> = {
 
     const headers = new Headers();
     setCookie(headers, {
-      name: "questions_done",
+      name: "survey_done",
       value: "true",
       httpOnly: true,
       secure: true,
