@@ -1,9 +1,8 @@
 import { Head } from "$fresh/runtime.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
-import Navigation from "../components/Navigation.tsx";
+// import Navigation from "../components/Navigation.tsx";
 import { db } from "../utils/db.ts";
 import { Answer, Question } from "../utils/db.ts";
-import { getCookies } from "$std/http/cookie.ts";
 
 interface ResultsData {
   results: Array<{
@@ -30,7 +29,7 @@ export default function Results({ data }: PageProps<ResultsData>) {
       <Head>
         <title>Survey Results - Reno Developer AI Survey</title>
       </Head>
-      <Navigation />
+      {/* <Navigation /> */}
       <div class="p-4 mx-auto max-w-screen-md">
         <h1 class="text-4xl font-bold mb-8">Survey Completed : Results</h1>
         {data.results.map(({ question, answers }) => (
