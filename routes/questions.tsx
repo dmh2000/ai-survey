@@ -19,11 +19,11 @@ export const handler: Handlers<SurveyData> = {
     const questions = db.getQuestions();
     const surveyData: SurveyData = {
       questions: await Promise.all(
-        questions.map(async (q) => ({
+        questions.map((q) => ({
           id: q.id,
           question: q.question,
           answers: db.getAnswers(q.id),
-        }))
+        })),
       ),
     };
     return ctx.render(surveyData);
@@ -32,7 +32,7 @@ export const handler: Handlers<SurveyData> = {
   POST: async (req) => {
     const formData = await req.formData();
     const answers = formData.getAll("answers");
-    
+
     for (const answerId of answers) {
       db.incrementAnswerCount(Number(answerId));
     }

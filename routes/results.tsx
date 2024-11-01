@@ -2,7 +2,7 @@ import { Head } from "$fresh/runtime.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
 import Navigation from "../components/Navigation.tsx";
 import { db } from "../utils/db.ts";
-import { Question, Answer } from "../utils/db.ts";
+import { Answer, Question } from "../utils/db.ts";
 
 interface ResultsData {
   results: Array<{
@@ -12,7 +12,7 @@ interface ResultsData {
 }
 
 export const handler: Handlers<ResultsData> = {
-  GET: async (_req, ctx) => {
+  GET: (_req, ctx) => {
     const questions = db.getQuestions();
     const results = questions.map((q) => ({
       question: q,
