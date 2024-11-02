@@ -91,6 +91,15 @@ export class Database {
       [questionId, comment]
     );
   }
+
+  public getComments(): Array<{question: string, comment: string}> {
+    return this.db.queryEntries(
+      `SELECT q.question, c.comment_text as comment 
+       FROM COMMENTS c 
+       JOIN QUESTIONS q ON q.id = c.question_id 
+       ORDER BY q.id`
+    );
+  }
 }
 
 export const db = new Database();
