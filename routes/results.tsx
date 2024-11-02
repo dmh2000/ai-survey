@@ -8,7 +8,6 @@ interface ResultsData {
   results: Array<{
     question: Question;
     answers: Answer[];
-    comment: string;
   }>;
 }
 
@@ -17,8 +16,7 @@ export const handler: Handlers<ResultsData> = {
     const questions = db.getQuestions();
     const results = questions.map((q) => ({
       question: q,
-      answers: db.getAnswers(q.id),
-      comment: q.comment || ''
+      answers: db.getAnswers(q.id)
     }));
 
     return ctx.render({ results });
@@ -54,12 +52,6 @@ export default function Results({ data }: PageProps<ResultsData>) {
                   ))}
                 </tbody>
               </table>
-              {question.comment && (
-                <div class="mt-4 p-4 bg-gray-50 rounded">
-                  <h3 class="font-semibold mb-2">Comments:</h3>
-                  <p class="whitespace-pre-wrap">{question.comment}</p>
-                </div>
-              )}
             </div>
           </div>
         ))}

@@ -87,8 +87,8 @@ export class Database {
 
   public saveComment(questionId: number, comment: string) {
     this.db.query(
-      "UPDATE QUESTIONS SET comment = ? WHERE id = ?",
-      [comment, questionId]
+      "INSERT INTO COMMENTS (question_id, comment_text) VALUES (?, ?)",
+      [questionId, comment]
     );
   }
 }
