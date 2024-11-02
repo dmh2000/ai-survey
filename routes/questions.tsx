@@ -11,6 +11,7 @@ interface SurveyData {
     answers: Array<{
       id: number;
       answer: string;
+      selected: boolean;
     }>;
     comment: {
       id: number;
@@ -35,7 +36,11 @@ export const handler: Handlers<SurveyData> = {
         questions.map((q) => ({
           id: q.id,
           question: q.question,
-          answers: db.getAnswers(q.id),
+          answers: db.getAnswers(q.id).map(a => ({
+            id: a.id,
+            answer: a.answer,
+            selected: false
+          })),
           comment: {
             id: q.id,
             text: ""
@@ -104,6 +109,7 @@ export default function Questions({ data }: PageProps<SurveyData>) {
                       id={`answer-${a.id}`}
                       name="answers"
                       value={a.id}
+                      checked={a.selected}
                       class="mr-2"
                     />
                     <label htmlFor={`answer-${a.id}`}>{a.answer}</label>
