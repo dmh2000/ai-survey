@@ -32,7 +32,7 @@ export const handler: Handlers<SurveyData> = {
           id: q.id,
           question: q.question,
           answers: db.getAnswers(q.id),
-        })),
+        }))
       ),
     };
 
@@ -41,12 +41,12 @@ export const handler: Handlers<SurveyData> = {
 
   POST: async (req) => {
     const formData = await req.formData();
+    console.log(formData);
     const answers = formData.getAll("answers");
 
     for (const answerId of answers) {
       db.incrementAnswerCount(Number(answerId));
     }
-
     const headers = new Headers();
     setCookie(headers, {
       name: "survey_done",
@@ -90,6 +90,9 @@ export default function Questions({ data }: PageProps<SurveyData>) {
                     <label htmlFor={`answer-${a.id}`}>{a.answer}</label>
                   </div>
                 ))}
+              </div>
+              <div class="mt-4">
+                <label htmlFor={`comment-${q.id}`}>Comment</label>
               </div>
             </div>
           ))}
