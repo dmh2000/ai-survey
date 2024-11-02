@@ -27,11 +27,25 @@ export default function Comments({ data }: PageProps<CommentsData>) {
         {data.comments.length === 0 ? (
           <p class="text-gray-600">No comments have been submitted yet.</p>
         ) : (
-          <div class="space-y-6">
-            {data.comments.map((item, index) => (
-              <div key={index} class="bg-white p-4 rounded-lg shadow">
-                <h2 class="text-xl font-semibold mb-2">{item.question}</h2>
-                <p class="text-gray-700 whitespace-pre-wrap">{item.comment}</p>
+          <div class="space-y-8">
+            {Object.entries(
+              data.comments.reduce((acc, curr) => {
+                if (!acc[curr.question]) {
+                  acc[curr.question] = [];
+                }
+                acc[curr.question].push(curr.comment);
+                return acc;
+              }, {} as Record<string, string[]>)
+            ).map(([question, comments]) => (
+              <div key={question} class="bg-white p-6 rounded-lg shadow">
+                <h2 class="text-xl font-semibold mb-4">{question}</h2>
+                <div class="space-y-3 pl-4">
+                  {comments.map((comment, idx) => (
+                    <p key={idx} class="text-gray-700 whitespace-pre-wrap border-l-4 border-gray-200 pl-4">
+                      {comment}
+                    </p>
+                  ))}
+                </div>
               </div>
             ))}
           </div>

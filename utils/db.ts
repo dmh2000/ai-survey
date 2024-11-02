@@ -94,10 +94,11 @@ export class Database {
 
   public getComments(): Array<{question: string, comment: string}> {
     return this.db.queryEntries(
-      `SELECT q.question, c.comment_text as comment 
+      `SELECT q.question, c.comment_text as comment,
+              q.id as question_id
        FROM COMMENTS c 
        JOIN QUESTIONS q ON q.id = c.question_id 
-       ORDER BY q.id`
+       ORDER BY q.id, c.id`
     );
   }
 }
