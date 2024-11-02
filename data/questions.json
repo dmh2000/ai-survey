@@ -49,7 +49,8 @@
                     "answer": "None",
                     "selected": false
                 }
-            ]
+            ],
+            "other": ""
         },
         {
             "id": 2,
@@ -110,7 +111,8 @@
                     "answer": "Other",
                     "selected": false
                 }
-            ]
+            ],
+            "other": ""
         }
     ]
 }
