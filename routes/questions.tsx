@@ -12,6 +12,10 @@ interface SurveyData {
       id: number;
       answer: string;
     }>;
+    comment: {
+      id: number;
+      text: string;
+    };
   }>;
 }
 
@@ -32,6 +36,10 @@ export const handler: Handlers<SurveyData> = {
           id: q.id,
           question: q.question,
           answers: db.getAnswers(q.id),
+          comment: {
+            id: q.id,
+            text: ""
+          }
         }))
       ),
     };
@@ -44,8 +52,19 @@ export const handler: Handlers<SurveyData> = {
     console.log(formData);
     const answers = formData.getAll("answers");
 
+    // Handle answers
     for (const answerId of answers) {
       db.incrementAnswerCount(Number(answerId));
+    }
+
+    // Handle comments
+    for (const [key, value] of formData.entries()) {
+      if (key.startsWith('comment-')) {
+        const questionId = parseInt(key.split('-')[1]);
+        if (value && typeof value === 'string') {
+          db.saveComment(questionId, value);
+        }
+      }
     }
     const headers = new Headers();
     setCookie(headers, {
@@ -92,7 +111,14 @@ export default function Questions({ data }: PageProps<SurveyData>) {
                 ))}
               </div>
               <div class="mt-4">
-                <label htmlFor={`comment-${q.id}`}>Comment</label>
+                <label htmlFor={`comment-${q.id}`} class="block mb-2">Additional Comments:</label>
+                <textarea
+                  id={`comment-${q.id}`}
+                  name={`comment-${q.id}`}
+                  rows={3}
+                  class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter any additional comments here..."
+                ></textarea>
               </div>
             </div>
           ))}
