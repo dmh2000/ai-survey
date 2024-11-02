@@ -84,6 +84,13 @@ export class Database {
       [answerId]
     );
   }
+
+  public saveComment(questionId: number, comment: string) {
+    this.db.query(
+      "UPDATE QUESTIONS SET comment = ? WHERE id = ?",
+      [comment, questionId]
+    );
+  }
 }
 
 export const db = new Database();
