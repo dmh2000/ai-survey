@@ -8,6 +8,7 @@ interface ResultsData {
   results: Array<{
     question: Question;
     answers: Answer[];
+    comment: string;
   }>;
 }
 
@@ -17,6 +18,7 @@ export const handler: Handlers<ResultsData> = {
     const results = questions.map((q) => ({
       question: q,
       answers: db.getAnswers(q.id),
+      comment: q.comment || ''
     }));
 
     return ctx.render({ results });
@@ -35,22 +37,30 @@ export default function Results({ data }: PageProps<ResultsData>) {
         {data.results.map(({ question, answers }) => (
           <div key={question.id} class="mb-8">
             <h2 class="text-2xl font-semibold mb-4">{question.question}</h2>
-            <table class="w-full border-collapse">
-              <thead>
-                <tr>
-                  <th class="border p-2 text-left">Answer</th>
-                  <th class="border p-2 text-left">Count</th>
-                </tr>
-              </thead>
-              <tbody>
-                {answers.map((answer) => (
-                  <tr key={answer.id}>
-                    <td class="border p-2">{answer.answer}</td>
-                    <td class="border p-2">{answer.count}</td>
+            <div>
+              <table class="w-full border-collapse mb-4">
+                <thead>
+                  <tr>
+                    <th class="border p-2 text-left">Answer</th>
+                    <th class="border p-2 text-left">Count</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {answers.map((answer) => (
+                    <tr key={answer.id}>
+                      <td class="border p-2">{answer.answer}</td>
+                      <td class="border p-2">{answer.count}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {question.comment && (
+                <div class="mt-4 p-4 bg-gray-50 rounded">
+                  <h3 class="font-semibold mb-2">Comments:</h3>
+                  <p class="whitespace-pre-wrap">{question.comment}</p>
+                </div>
+              )}
+            </div>
           </div>
         ))}
       </div>
