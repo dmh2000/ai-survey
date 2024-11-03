@@ -3,6 +3,9 @@ import { Handlers, PageProps } from "$fresh/server.ts";
 import { getCookies, setCookie } from "$std/http/cookie.ts";
 import Navigation from "../components/Navigation.tsx";
 import { db } from "../utils/db.ts";
+import word_clean from "../utils/words.ts";
+import * as ammonia from "https://deno.land/x/ammonia@0.3.1/mod.ts";
+await ammonia.init();
 
 interface SurveyData {
   questions: Array<{
@@ -36,15 +39,15 @@ export const handler: Handlers<SurveyData> = {
         questions.map((q) => ({
           id: q.id,
           question: q.question,
-          answers: db.getAnswers(q.id).map(a => ({
+          answers: db.getAnswers(q.id).map((a) => ({
             id: a.id,
             answer: a.answer,
-            selected: false
+            selected: false,
           })),
           comment: {
             id: q.id,
-            text: ""
-          }
+            text: "",
+          },
         }))
       ),
     };
@@ -64,10 +67,14 @@ export const handler: Handlers<SurveyData> = {
 
     // Handle comments
     for (const [key, value] of formData.entries()) {
-      if (key.startsWith('comment-')) {
-        const questionId = parseInt(key.split('-')[1]);
-        if (value && typeof value === 'string') {
-          db.saveComment(questionId, value);
+      if (key.startsWith("comment-")) {
+        const questionId = parseInt(key.split("-")[1]);
+        if (value && typeof value === "string") {
+          // Sanitize the comment
+          const xss = ammonia.clean(value);
+          // remove objectional words
+          const words = word_clean(xss);
+          db.saveComment(questionId, words);
         }
       }
     }
@@ -117,7 +124,9 @@ export default function Questions({ data }: PageProps<SurveyData>) {
                 ))}
               </div>
               <div class="mt-4">
-                <label htmlFor={`comment-${q.id}`} class="block mb-2">Additional Comments:</label>
+                <label htmlFor={`comment-${q.id}`} class="block mb-2">
+                  Additional Comments:
+                </label>
                 <textarea
                   id={`comment-${q.id}`}
                   name={`comment-${q.id}`}

@@ -1,19 +1,4 @@
 import { Head } from "$fresh/runtime.ts";
-import { Handlers } from "$fresh/server.ts";
-import { getCookies } from "$std/http/cookie.ts";
-
-export const handler: Handlers = {
-  GET: (_req, ctx) => {
-    const cookies = getCookies(_req.headers);
-    if (cookies.survey_done == "true") {
-      return new Response("Already done!", {
-        status: 303,
-        headers: { location: "/results" },
-      });
-    }
-    return ctx.render({});
-  },
-};
 
 export default function Home() {
   return (

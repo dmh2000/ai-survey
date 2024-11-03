@@ -41,16 +41,19 @@
                 },
                 {
                     "id": 108,
-                    "answer": "Other",
+                    "answer": "None",
                     "selected": false
                 },
                 {
                     "id": 109,
-                    "answer": "None",
+                    "answer": "Other",
                     "selected": false
                 }
             ],
-            "other": ""
+            "comment": {
+                "id": 1,
+                "text": ""
+            }
         },
         {
             "id": 2,
@@ -102,17 +105,17 @@
                     "selected": false
                 },
                 {
-                    "id": 210,
+                    "id": 211,
                     "answer": "None",
                     "selected": false
                 },
                 {
-                    "id": 211,
+                    "id": 210,
                     "answer": "Other",
                     "selected": false
                 }
             ],
-            "other": ""
+            "comment": "text"
         }
     ]
 }
