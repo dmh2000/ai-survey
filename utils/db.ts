@@ -104,9 +104,6 @@ export class Database {
   }
 }
 
-// Use in-memory database for development, file for production
-// const dbPath = Deno.env.get("ENVIRONMENT") === "production"
-//   ? "./data/survey.db"
-//   : undefined;
+// set dbPath as undefined to use in-memory database
 const dbPath = "./data/survey.db";
 export const db = new Database(dbPath);

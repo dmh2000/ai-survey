@@ -4,8 +4,8 @@ const badWords = new Set<string>();
 // Load words from CSV file at startup
 try {
   const text = await Deno.readTextFileSync("./utils/words.csv");
-  const words = text.split(",").map(word => word.trim().toLowerCase());
-  words.forEach(word => badWords.add(word));
+  const words = text.split("\n").map((word) => word.trim().toLowerCase());
+  words.forEach((word) => badWords.add(word));
 } catch (error) {
   console.error("Error loading words.csv:", error);
 }
@@ -27,6 +27,6 @@ export function isBlockedWord(word: string): boolean {
 export function filterText(text: string): string {
   return text
     .split(" ")
-    .filter(word => !isBlockedWord(word))
+    .filter((word) => !isBlockedWord(word))
     .join(" ");
 }

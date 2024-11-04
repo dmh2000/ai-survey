@@ -13,6 +13,11 @@ export default function Home() {
           survey aims to understand which AI technologies are most popular in
           the developer community.
         </p>
+        <p>
+          Note: There is only one cookie (survey complete) and it is required.
+          There is no login required and no user data is stored besides the
+          answers to the survey.
+        </p>
         <div class="flex gap-4">
           <a
             href="/questions"

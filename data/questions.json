@@ -168,7 +168,7 @@
         },
         {
             "id": 5,
-            "question": "Do you generate code with AI in terminal (Aider) or copy/paste from an app (chatGPT,etc)?",
+            "question": "Do you generate code with AI in terminal (Aider), use an app that can read/write files, or copy/paste from web app?",
             "answers": [
                 {
                     "id": 501,
@@ -177,12 +177,12 @@
                 },
                 {
                     "id": 502,
-                    "answer": "copy/paste",
+                    "answer": "app with file read/write",
                     "selected": false
                 },
                 {
                     "id": 503,
-                    "answer": "Both",
+                    "answer": "copy/paste",
                     "selected": false
                 },
                 {
@@ -204,22 +204,7 @@
             "answers": [
                 {
                     "id": 901,
-                    "answer": "Tabs",
-                    "selected": false
-                },
-                {
-                    "id": 902,
-                    "answer": "Spaces",
-                    "selected": false
-                },
-                {
-                    "id": 903,
-                    "answer": "None",
-                    "selected": false
-                },
-                {
-                    "id": 904,
-                    "answer": "Other",
+                    "answer": "Never Mind...",
                     "selected": false
                 }
             ],
