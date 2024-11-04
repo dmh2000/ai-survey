@@ -168,7 +168,7 @@
         },
         {
             "id": 5,
-            "question": "Do you generate code with AI in terminal (Aider) or copy/paste from an app (chatGpt,etc)?",
+            "question": "Do you generate code with AI in terminal (Aider) or copy/paste from an app (chatGPT,etc)?",
             "answers": [
                 {
                     "id": 501,
