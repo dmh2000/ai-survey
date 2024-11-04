@@ -31,6 +31,20 @@ export default function Results({ data }: PageProps<ResultsData>) {
       </Head>
       {/* <Navigation /> */}
       <div class="p-4 mx-auto max-w-screen-md">
+        <div class="flex gap-4 mb-8">
+          <a
+            href="/"
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Home
+          </a>
+          <a
+            href="/comments"
+            class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+          >
+            View Comments
+          </a>
+        </div>
         <h1 class="text-4xl font-bold mb-8">Survey Completed : Results</h1>
         {data.results.map(({ question, answers }) => (
           <div key={question.id} class="mb-8">
@@ -55,14 +69,6 @@ export default function Results({ data }: PageProps<ResultsData>) {
             </div>
           </div>
         ))}
-        <div class="mt-8">
-          <a
-            href="/comments"
-            class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-          >
-            View Comments
-          </a>
-        </div>
       </div>
     </>
   );
