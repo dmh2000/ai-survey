@@ -31,9 +31,9 @@ interface SurveyData {
 export class Database {
   private db: DB;
 
-  constructor() {
-    // Create database in memory for development
-    this.db = new DB(":memory:");
+  constructor(dbPath?: string) {
+    // Use in-memory database if no path provided, otherwise use file
+    this.db = new DB(dbPath || ":memory:");
     this.init();
   }
 
@@ -103,4 +103,8 @@ export class Database {
   }
 }
 
-export const db = new Database();
+// Use in-memory database for development, file for production
+const dbPath = Deno.env.get("ENVIRONMENT") === "production" 
+  ? "./data/survey.db" 
+  : undefined;
+export const db = new Database(dbPath);
