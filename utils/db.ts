@@ -1,4 +1,4 @@
-import { DB } from "https://deno.land/x/sqlite@v3.7.0/mod.ts";
+import { DB } from "https://deno.land/x/sqlite@v3.9.1/mod.ts";
 
 export interface Question {
   id: number;
@@ -45,7 +45,9 @@ export class Database {
 
   private initializeData() {
     // Only initialize if the database is empty
-    const count = this.db.query("SELECT COUNT(*) as count FROM QUESTIONS")[0][0];
+    const count = this.db.query(
+      "SELECT COUNT(*) as count FROM QUESTIONS"
+    )[0][0];
     if (count === 0) {
       const surveyData = JSON.parse(
         Deno.readTextFileSync("./data/questions.json")
@@ -79,10 +81,9 @@ export class Database {
   }
 
   public incrementAnswerCount(answerId: number) {
-    this.db.query(
-      "UPDATE ANSWERS SET count = count + 1 WHERE id = ?",
-      [answerId]
-    );
+    this.db.query("UPDATE ANSWERS SET count = count + 1 WHERE id = ?", [
+      answerId,
+    ]);
   }
 
   public saveComment(questionId: number, comment: string) {
@@ -92,7 +93,7 @@ export class Database {
     );
   }
 
-  public getComments(): Array<{question: string, comment: string}> {
+  public getComments(): Array<{ question: string; comment: string }> {
     return this.db.queryEntries(
       `SELECT q.question, c.comment_text as comment,
               q.id as question_id
@@ -104,7 +105,8 @@ export class Database {
 }
 
 // Use in-memory database for development, file for production
-const dbPath = Deno.env.get("ENVIRONMENT") === "production" 
-  ? "./data/survey.db" 
-  : undefined;
+// const dbPath = Deno.env.get("ENVIRONMENT") === "production"
+//   ? "./data/survey.db"
+//   : undefined;
+const dbPath = "./data/survey.db";
 export const db = new Database(dbPath);
