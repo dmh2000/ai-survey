@@ -55,6 +55,14 @@ export default function Results({ data }: PageProps<ResultsData>) {
             </div>
           </div>
         ))}
+        <div class="mt-8">
+          <a
+            href="/comments"
+            class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+          >
+            View Comments
+          </a>
+        </div>
       </div>
     </>
   );
