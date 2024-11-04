@@ -81,7 +81,7 @@
                 },
                 {
                     "id": 205,
-                    "answer": "Cline",
+                    "answer": "Cline (Continue.dev)",
                     "selected": false
                 },
                 {
@@ -115,7 +115,115 @@
                     "selected": false
                 }
             ],
-            "comment": "text"
+            "comment": ""
+        },
+        {
+            "id": 3,
+            "question": "Do you run models locally or on a cloud service?",
+            "answers": [
+                {
+                    "id": 301,
+                    "answer": "Local",
+                    "selected": false
+                },
+                {
+                    "id": 302,
+                    "answer": "Cloud",
+                    "selected": false
+                },
+                {
+                    "id": 303,
+                    "answer": "Both",
+                    "selected": false
+                },
+                {
+                    "id": 304,
+                    "answer": "None",
+                    "selected": false
+                },
+                {
+                    "id": 305,
+                    "answer": "Other",
+                    "selected": false
+                }
+            ],
+            "comment": ""
+        },
+        {
+            "id": 4,
+            "question": "Have you used any AI tools for code review? Which one?",
+            "answers": [
+                {
+                    "id": 401,
+                    "answer": "Yes",
+                    "selected": false
+                },
+                {
+                    "id": 402,
+                    "answer": "No",
+                    "selected": false
+                }
+            ],
+            "comment": ""
+        },
+        {
+            "id": 5,
+            "question": "Do you generate code with AI in terminal (Aider) or copy/paste from an app (chatGpt,etc)?",
+            "answers": [
+                {
+                    "id": 501,
+                    "answer": "terminal",
+                    "selected": false
+                },
+                {
+                    "id": 502,
+                    "answer": "copy/paste",
+                    "selected": false
+                },
+                {
+                    "id": 503,
+                    "answer": "Both",
+                    "selected": false
+                },
+                {
+                    "id": 504,
+                    "answer": "None",
+                    "selected": false
+                },
+                {
+                    "id": 505,
+                    "answer": "Other",
+                    "selected": false
+                }
+            ],
+            "comment": ""
+        },
+        {
+            "id": 9,
+            "question": "Tabs or Spaces?",
+            "answers": [
+                {
+                    "id": 901,
+                    "answer": "Tabs",
+                    "selected": false
+                },
+                {
+                    "id": 902,
+                    "answer": "Spaces",
+                    "selected": false
+                },
+                {
+                    "id": 903,
+                    "answer": "None",
+                    "selected": false
+                },
+                {
+                    "id": 904,
+                    "answer": "Other",
+                    "selected": false
+                }
+            ],
+            "comment": ""
         }
     ]
 }
