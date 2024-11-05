@@ -105,5 +105,5 @@ export class Database {
 }
 
 // set dbPath as undefined to use in-memory database
-const dbPath = "./data/survey.db";
+const dbPath = undefined; // "./data/survey.db";
 export const db = new Database(dbPath);
