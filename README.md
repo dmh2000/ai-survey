@@ -19,6 +19,7 @@ There is no login or registration. The 'survey-completed' cookie is set on the f
 - Framework: [Deno-Fresh] (https://github.com/denoland/fresh)
 - CSS Framework: [Tailwind CSS](https://https://tailwindcss.com/)
 - Database: [SQLite 3](https://www.sqlite.org/index.html)
+- Hosting: [Deno Deploy](https://deno.com/deploy)
 
 ## Data
 
