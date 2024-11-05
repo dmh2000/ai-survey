@@ -2,7 +2,7 @@
 
 This is a simple survey web app created using AI.
 
-## AI
+## AI Code Generation Summary
 
 This was created using Aider and Anthropic's Claude-3-5-sonnet-20241022 model. It ook about 2 hours to complete it. I just wanted a simple survey to use at a developer meetup.
 
@@ -13,12 +13,12 @@ I only had to add a few of things by hand:
 
 There is no login or registration. The 'survey-completed' cookie is set on the first page load. If the user has already completed the survey, it won't let them do it again while the same browser is running. If you kill the browser and start over it will let you complete the survey again. So don't do that.
 
-## App Tech
+## App Technogology Used
 
-- Deno
-- Deno-Fresh
-- Tailwind CSS
-- SQLite 3
+- Runtime: [Deno](https://deno.com/)
+- Framework: [Deno-Fresh] (https://github.com/denoland/fresh)
+- CSS Framework: [Tailwind CSS](https://https://tailwindcss.com/)
+- Database: [SQLite 3](https://www.sqlite.org/index.html)
 
 ## Data
 
