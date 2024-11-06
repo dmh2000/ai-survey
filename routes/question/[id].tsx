@@ -25,7 +25,7 @@ interface QuestionData {
 }
 
 export const handler: Handlers<QuestionData> = {
-  GET: async (req, ctx) => {
+  GET: (req, ctx) => {
     const cookies = getCookies(req.headers);
     if (cookies.survey_done === "true") {
       return new Response("Already done!", {
@@ -36,8 +36,8 @@ export const handler: Handlers<QuestionData> = {
 
     const questionId = parseInt(ctx.params.id);
     const questions = db.getQuestions();
-    const question = questions.find(q => q.id === questionId);
-    
+    const question = questions.find((q) => q.id === questionId);
+
     if (!question) {
       return new Response("Question not found", {
         status: 303,
@@ -45,7 +45,7 @@ export const handler: Handlers<QuestionData> = {
       });
     }
 
-    const answers = db.getAnswers(questionId).map(a => ({
+    const answers = db.getAnswers(questionId).map((a) => ({
       id: a.id,
       answer: a.answer,
       selected: false,
@@ -69,7 +69,7 @@ export const handler: Handlers<QuestionData> = {
     const formData = await req.formData();
     const questionId = parseInt(formData.get("questionId")?.toString() || "0");
     const submitType = formData.get("submitType");
-    
+
     // Handle answers
     const answers = formData.getAll("answers");
     for (const answerId of answers) {
@@ -98,9 +98,9 @@ export const handler: Handlers<QuestionData> = {
     } else {
       // Navigate to next or previous question
       const questions = db.getQuestions();
-      const currentIndex = questions.findIndex(q => q.id === questionId);
+      const currentIndex = questions.findIndex((q) => q.id === questionId);
       let nextId;
-      
+
       if (submitType === "next" && currentIndex < questions.length - 1) {
         nextId = questions[currentIndex + 1].id;
       } else if (submitType === "back" && currentIndex > 0) {
@@ -108,7 +108,7 @@ export const handler: Handlers<QuestionData> = {
       } else {
         nextId = questions[0].id;
       }
-      
+
       headers.set("location", `/question/${nextId}`);
     }
 
@@ -121,7 +121,7 @@ export const handler: Handlers<QuestionData> = {
 
 export default function Question({ data }: PageProps<QuestionData>) {
   const { question, totalQuestions } = data;
-  
+
   return (
     <>
       <Head>
@@ -134,7 +134,7 @@ export default function Question({ data }: PageProps<QuestionData>) {
         </h1>
         <form method="POST">
           <input type="hidden" name="questionId" value={question.id} />
-          
+
           <div class="mb-8">
             <h2 class="text-2xl font-semibold mb-4">{question.question}</h2>
             <div class="space-y-2">
