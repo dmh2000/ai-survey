@@ -22,6 +22,7 @@ interface QuestionData {
     };
   };
   totalQuestions: number;
+  isLastQuestion: boolean;
 }
 
 export const handler: Handlers<QuestionData> = {
@@ -51,6 +52,8 @@ export const handler: Handlers<QuestionData> = {
       selected: false,
     }));
 
+    const isLastQuestion = questionId === questions[questions.length - 1].id;
+    
     return ctx.render({
       question: {
         id: question.id,
@@ -62,6 +65,7 @@ export const handler: Handlers<QuestionData> = {
         },
       },
       totalQuestions: questions.length,
+      isLastQuestion,
     });
   },
 
@@ -176,14 +180,16 @@ export default function Question({ data }: PageProps<QuestionData>) {
             >
               Back
             </button>
-            <button
-              type="submit"
-              name="submitType"
-              value="next"
-              class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-            >
-              Next
-            </button>
+            {!data.isLastQuestion && (
+              <button
+                type="submit"
+                name="submitType"
+                value="next"
+                class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                Next
+              </button>
+            )}
             <button
               type="submit"
               name="submitType"
