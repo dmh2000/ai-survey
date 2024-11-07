@@ -39,8 +39,9 @@
   },
   "nodeModulesDir": true,
   "deploy": {
-    "project": "davidh-ai-survey-13",
+    "project": "2cc79337-8992-4ad2-9682-11fb261ee645",
     "exclude": [
+      "**/node_modules",
       "**/node_modules"
     ],
     "include": [],
