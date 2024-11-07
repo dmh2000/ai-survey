@@ -41,9 +41,14 @@ export default function Home({ data }: PageProps<HomeData>) {
               Take Survey
             </a>
           )}
+          {data.surveyCompleted && (
+            <p class="px-4 py-2 bg-gray-500 text-white rounded">
+              Survey Completed
+            </p>
+          )}
           <a
             href="/results"
-            class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+            class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600"
           >
             View Results
           </a>

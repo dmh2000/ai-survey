@@ -31,14 +31,6 @@ export const handler: Handlers<QuestionData> = {
     console.log("id.tsx", cookies);
     if (cookies.survey_done === "true") {
       const headers = new Headers();
-      // setCookie(headers, {
-      //   name: "survey_done",
-      //   value: "false",
-      //   httpOnly: true,
-      //   secure: true,
-      //   sameSite: "Strict",
-      //   path: "/",
-      // });
       headers.set("location", "/results");
       return new Response("Already done!", {
         status: 303,
