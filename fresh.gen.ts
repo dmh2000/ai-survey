@@ -6,6 +6,7 @@ import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $comments from "./routes/comments.tsx";
 import * as $index from "./routes/index.tsx";
+import * as $question_id_ from "./routes/question/[id].tsx";
 import * as $questions from "./routes/questions.tsx";
 import * as $results from "./routes/results.tsx";
 
@@ -17,6 +18,7 @@ const manifest = {
     "./routes/_app.tsx": $_app,
     "./routes/comments.tsx": $comments,
     "./routes/index.tsx": $index,
+    "./routes/question/[id].tsx": $question_id_,
     "./routes/questions.tsx": $questions,
     "./routes/results.tsx": $results,
   },
