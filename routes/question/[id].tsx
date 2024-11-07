@@ -28,10 +28,21 @@ interface QuestionData {
 export const handler: Handlers<QuestionData> = {
   GET: (req, ctx) => {
     const cookies = getCookies(req.headers);
+    console.log("id.tsx", cookies);
     if (cookies.survey_done === "true") {
+      const headers = new Headers();
+      // setCookie(headers, {
+      //   name: "survey_done",
+      //   value: "false",
+      //   httpOnly: true,
+      //   secure: true,
+      //   sameSite: "Strict",
+      //   path: "/",
+      // });
+      headers.set("location", "/results");
       return new Response("Already done!", {
         status: 303,
-        headers: { location: "/results" },
+        headers,
       });
     }
 
@@ -53,7 +64,7 @@ export const handler: Handlers<QuestionData> = {
     }));
 
     const isLastQuestion = questionId === questions[questions.length - 1].id;
-    
+
     return ctx.render({
       question: {
         id: question.id,
@@ -96,7 +107,8 @@ export const handler: Handlers<QuestionData> = {
         value: "true",
         httpOnly: true,
         secure: true,
-        sameSite: "Lax",
+        sameSite: "Strict",
+        path: "/",
       });
       headers.set("location", "/results");
     } else {
