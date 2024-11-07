@@ -1,6 +1,20 @@
 import { Head } from "$fresh/runtime.ts";
+import { Handlers, PageProps } from "$fresh/server.ts";
+import { getCookies } from "$std/http/cookie.ts";
 
-export default function Home() {
+interface HomeData {
+  surveyCompleted: boolean;
+}
+
+export const handler: Handlers<HomeData> = {
+  GET: (req, ctx) => {
+    const cookies = getCookies(req.headers);
+    const surveyCompleted = cookies.survey_done === "true";
+    return ctx.render({ surveyCompleted });
+  },
+};
+
+export default function Home({ data }: PageProps<HomeData>) {
   return (
     <>
       <Head>
@@ -19,12 +33,14 @@ export default function Home() {
           answers to the survey.
         </p>
         <div class="flex gap-4">
-          <a
-            href="/questions"
-            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            Take Survey
-          </a>
+          {!data.surveyCompleted && (
+            <a
+              href="/questions"
+              class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+              Take Survey
+            </a>
+          )}
           <a
             href="/results"
             class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
