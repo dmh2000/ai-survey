@@ -1,21 +1,29 @@
 import { Handlers } from "$fresh/server.ts";
-import { db } from "../utils/db.ts";
+import { db, Question } from "../utils/db.ts";
 import { getCookies } from "$std/http/cookie.ts";
 
 export const handler: Handlers = {
   GET: (_req, _ctx) => {
-    const questions = db.getQuestions();
-    const firstQuestionId = questions[0]?.id || 1;
+    try {
+      const questions: Question[] = db.getQuestions();
+      if (questions.length === 0) {
+        return new Response("No questions found", { status: 404 });
+      }
+      const firstQuestionId = questions[0]?.id;
 
-    const cookies = getCookies(_req.headers);
-    console.log("questions.tsx", cookies);
+      const cookies = getCookies(_req.headers);
+      console.log("questions.tsx", cookies);
 
-    const headers = new Headers();
-    headers.set("location", `/question/${firstQuestionId}`);
+      const headers = new Headers();
+      headers.set("location", `/question/${firstQuestionId}`);
 
-    return new Response("", {
-      status: 303,
-      headers,
-    });
+      return new Response("", {
+        status: 303,
+        headers,
+      });
+    } catch (e) {
+      console.error(e);
+      return new Response("Something went wrong", { status: 500 });
+    }
   },
 };

@@ -32,9 +32,14 @@ export class Database {
   private db: DB;
 
   constructor(dbPath?: string) {
-    // Use in-memory database if no path provided, otherwise use file
-    this.db = new DB(dbPath || ":memory:");
-    this.init();
+    try {
+      // Use in-memory database if no path provided, otherwise use file
+      this.db = new DB(dbPath || ":memory:");
+      this.init();
+    } catch (e) {
+      console.error(e);
+      throw new Error("Failed to initialize database");
+    }
   }
 
   private init() {
@@ -81,6 +86,9 @@ export class Database {
   }
 
   public incrementAnswerCount(answerId: number) {
+    if (!Number.isInteger(answerId) || answerId <= 0) {
+      throw new Error("Invalid answer ID");
+    }
     this.db.query("UPDATE ANSWERS SET count = count + 1 WHERE id = ?", [
       answerId,
     ]);
@@ -101,6 +109,10 @@ export class Database {
        JOIN QUESTIONS q ON q.id = c.question_id 
        ORDER BY q.id, c.id`
     );
+  }
+
+  public close() {
+    this.db.close();
   }
 }
 
